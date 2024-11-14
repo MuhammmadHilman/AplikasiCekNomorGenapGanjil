@@ -39,9 +39,8 @@ public class AplikasiCekNomorGenapGanjil extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        hasil_label = new javax.swing.JLabel();
         jTextFieldInput = new javax.swing.JTextField();
-        jTextFieldResult = new javax.swing.JTextField();
         jButtonCek = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -54,18 +53,18 @@ public class AplikasiCekNomorGenapGanjil extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(43, 26, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(77, 32, 0, 0);
         jPanel1.add(jLabel1, gridBagConstraints);
 
-        jLabel2.setText("Hasil Bilangan :");
+        hasil_label.setText("Hasil Bilangan :");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 13;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 282;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(40, 26, 0, 0);
-        jPanel1.add(jLabel2, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(40, 32, 0, 6);
+        jPanel1.add(hasil_label, gridBagConstraints);
 
         jTextFieldInput.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -80,21 +79,11 @@ public class AplikasiCekNomorGenapGanjil extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.ipadx = 348;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(11, 26, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(11, 32, 0, 6);
         jPanel1.add(jTextFieldInput, gridBagConstraints);
-
-        jTextFieldResult.setEditable(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 348;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(11, 26, 0, 0);
-        jPanel1.add(jTextFieldResult, gridBagConstraints);
 
         jButtonCek.setText("Cek Nomor");
         jButtonCek.addActionListener(new java.awt.event.ActionListener() {
@@ -103,10 +92,10 @@ public class AplikasiCekNomorGenapGanjil extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 37, 64, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 40, 87, 0);
         jPanel1.add(jButtonCek, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -135,30 +124,34 @@ public class AplikasiCekNomorGenapGanjil extends javax.swing.JFrame {
 
     private void jButtonCekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCekActionPerformed
        try {
-            // Mengambil input dari JTextField
-            int number = Integer.parseInt(jTextFieldInput.getText());
-            boolean isPrime = true;
+        // Mengambil input dari JTextField
+        int number = Integer.parseInt(jTextFieldInput.getText());
+        boolean isPrime = true;
 
-            // Cek apakah angka prima
-            if (number <= 1) {
-                isPrime = false;
-            } else {
-                for (int i = 2; i <= Math.sqrt(number); i++) {
-                    if (number % i == 0) {
-                        isPrime = false;
-                        break;
-                    }
+        // Cek apakah angka prima
+        if (number <= 1) {
+            isPrime = false;
+        } else {
+            for (int i = 2; i <= Math.sqrt(number); i++) {
+                if (number % i == 0) {
+                    isPrime = false;
+                    break;
                 }
             }
+        }
 
-            // Tentukan apakah genap atau ganjil
-            String parity = (number % 2 == 0) ? "Genap" : "Ganjil";
-            String primeStatus = isPrime ? "dan bilangan prima" : "dan bukan bilangan prima";
+        // Tentukan apakah genap atau ganjil
+        String parity = (number % 2 == 0) ? "Genap" : "Ganjil";
+        String primeStatus = isPrime ? "dan bilangan prima" : "dan bukan bilangan prima";
 
-            // Tampilkan hasil di JTextField result
-            jTextFieldResult.setText("Angka " + number + " adalah " + parity + " " + primeStatus);
+        // Tampilkan hasil di JLabel hasil_label
+        hasil_label.setText("Angka " + number + " adalah " + parity + " " + primeStatus);
+
+        // Tampilkan hasil di JOptionPane
+        JOptionPane.showMessageDialog(this, "Angka " + number + " adalah " + parity + " " + primeStatus);
         } catch (NumberFormatException e) {
             // Tampilkan pesan error jika input bukan angka
+            hasil_label.setText("Masukkan angka yang valid");
             JOptionPane.showMessageDialog(this, "Masukkan angka yang valid", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonCekActionPerformed
@@ -206,11 +199,10 @@ public class AplikasiCekNomorGenapGanjil extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel hasil_label;
     private javax.swing.JButton jButtonCek;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextFieldInput;
-    private javax.swing.JTextField jTextFieldResult;
     // End of variables declaration//GEN-END:variables
 }
